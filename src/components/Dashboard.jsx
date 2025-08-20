@@ -86,7 +86,7 @@ const Dashboard = () => {
 
       {/* Contenuto principale basato sulla vista selezionata */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
-        <main className="py-10 lg:py-14 space-y-10 lg:space-y-14">
+        <main className="py-12 lg:py-16 space-y-12 lg:space-y-16">
         {viewMode === 'overview' && (
           <>
             {/* KPI Cards */}
@@ -96,7 +96,7 @@ const Dashboard = () => {
             />
             
             {/* Grid principale con pannelli (12 col su widescreen) */}
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 lg:gap-12">
               <EnvironmentalPanel 
                 currentData={currentData.environmental}
                 trends={getEnvironmentalTrends(days)}
@@ -122,7 +122,7 @@ const Dashboard = () => {
         )}
 
         {viewMode === 'environmental' && (
-          <div className="space-y-6">
+          <div className="space-y-8 lg:space-y-10">
             <EnvironmentalPanel 
               currentData={currentData.environmental}
               trends={getEnvironmentalTrends(days)}
@@ -137,7 +137,7 @@ const Dashboard = () => {
         )}
 
         {viewMode === 'production' && (
-          <div className="space-y-6">
+          <div className="space-y-8 lg:space-y-10">
             <ProductionPanel 
               productionData={currentData.production}
               trends={getProductionTrends(selectedCrop === 'all' ? null : selectedCrop, days)}
@@ -153,7 +153,7 @@ const Dashboard = () => {
         )}
 
         {viewMode === 'analytics' && (
-          <div className="space-y-6">
+          <div className="space-y-8 lg:space-y-10">
             <KPICards 
               kpis={currentData.kpis} 
               trends={getKPITrends(days)}
@@ -171,20 +171,20 @@ const Dashboard = () => {
         </main>
 
         {/* Footer con info sistema */}
-        <footer className={`mt-12 border-t backdrop-blur-sm ${
+        <footer className={`mt-16 lg:mt-20 border-t backdrop-blur-sm ${
           isDarkMode 
             ? 'border-gray-700/50 bg-gray-800/80' 
             : 'border-gray-200/50 bg-white/80'
-        } py-6`}>
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+        } py-8`}>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-sm text-gray-500">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 text-center sm:text-left">
               <span className="font-medium">Dashboard Agricolo "Terra Verde"</span>
               <span className="hidden sm:inline">•</span>
               <span>Punti dati: {historicalData.length}</span>
               <span className="hidden sm:inline">•</span>
               <span>Ultimo aggiornamento: {currentData.timestamp.toLocaleTimeString('it-IT')}</span>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <div className={`flex items-center space-x-2 px-3 py-1 rounded-full ${
                 isRealTimeActive 
                   ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' 

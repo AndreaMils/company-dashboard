@@ -162,12 +162,12 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
   };
 
   return (
-    <div className={`space-y-6 ${className} mx-0 lg:mx-0` }>
+    <div className={`space-y-8 ${className} mx-0 lg:mx-0` }>
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center space-x-3">
-          <Eye className={`w-6 h-6 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
-          <h2 className="text-xl font-bold">Condizioni Ambientali</h2>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-4">
+          <Eye className={`w-7 h-7 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+          <h2 className="text-2xl font-bold">Condizioni Ambientali</h2>
         </div>
         <div className="text-sm text-gray-500">
           Aggiornato: {format(new Date(currentData.timestamp), 'HH:mm:ss')}
@@ -177,7 +177,7 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
       {/* Metriche principali */}
       <div className={`grid grid-cols-2 ${
         expanded ? 'lg:grid-cols-3' : 'lg:grid-cols-2'
-      } gap-6 mt-4`}>
+      } gap-8 mt-6`}>
         {environmentalMetrics.map((metric) => {
           const IconComponent = metric.icon;
           const colorClasses = getColorClasses(metric.color);
@@ -185,33 +185,33 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
           return (
             <div
               key={metric.id}
-              className={`p-4 rounded-lg border transition-all duration-200 ${
+              className={`p-6 rounded-lg border transition-all duration-200 ${
                 isDarkMode 
                   ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
                   : 'bg-white border-gray-200 hover:border-gray-300'
               }`}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className={`p-2 rounded-lg ${colorClasses.split(' ')[1]}`}>
-                  <IconComponent className={`w-5 h-5 ${colorClasses.split(' ')[0]}`} />
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg ${colorClasses.split(' ')[1]}`}>
+                  <IconComponent className={`w-6 h-6 ${colorClasses.split(' ')[0]}`} />
                 </div>
                 {getStatusIcon(metric)}
               </div>
               
-              <div className="space-y-1">
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">{metric.title}</p>
-                <p className={`text-2xl font-bold ${colorClasses.split(' ')[0]} leading-tight` }>
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-gray-400 uppercase tracking-wide">{metric.title}</p>
+                <p className={`text-3xl font-bold ${colorClasses.split(' ')[0]} leading-tight` }>
                   {metric.value.toFixed(1)}{metric.unit}
                 </p>
                 
                 {expanded && metric.description && (
-                  <p className="text-xs text-gray-400 mt-2">
+                  <p className="text-xs text-gray-400 mt-3">
                     {metric.description}
                   </p>
                 )}
                 
                 {expanded && (
-                  <div className="text-xs text-gray-500 mt-1">
+                  <div className="text-xs text-gray-500 mt-2">
                     Ottimale: {metric.range.optimal.min}-{metric.range.optimal.max}{metric.unit}
                   </div>
                 )}
@@ -223,14 +223,14 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
 
       {/* Grafico trend se espanso o con dati sufficienti */}
       {(expanded || trends.length > 5) && (
-        <div className={`p-6 rounded-lg border ${
+        <div className={`p-8 rounded-lg border ${
           isDarkMode 
             ? 'bg-gray-800 border-gray-700' 
             : 'bg-white border-gray-200'
         }`}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold flex items-center space-x-2">
-              <TrendingUp className="w-5 h-5" />
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-semibold flex items-center space-x-3">
+              <TrendingUp className="w-6 h-6" />
               <span>Trend Ambientali</span>
             </h3>
             <div className="text-sm text-gray-500">

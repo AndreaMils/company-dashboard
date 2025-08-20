@@ -58,31 +58,28 @@ const DashboardHeader = ({
         <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between space-y-6 xl:space-y-0">
           
           {/* Informazioni Azienda */}
-          <div className="flex items-center space-x-4 lg:space-x-6">
+          <div className="flex items-center space-x-6 lg:space-x-8">
             <div className={`p-4 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl ${
               isDarkMode ? 'bg-gradient-to-br from-green-900 to-green-800' : 'bg-gradient-to-br from-green-100 to-green-50'
             }`}>
-              <Tractor className={`w-8 h-8 lg:w-10 lg:h-10 ${
-                isDarkMode ? 'text-green-400' : 'text-green-600'
-              }`} />
             </div>
             
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-white">
                 Azienda Agricola "Terra Verde"
               </h1>
-              <div className="flex flex-wrap items-center gap-3 lg:gap-6 text-sm text-gray-500 mt-2">
-                <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+              <div className="flex flex-col gap-6 text-sm text-gray-500 mt-4">
+                <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full w-fit">
                   <MapPin className="w-4 h-4" />
                   <span className="font-medium">Pianura Padana, Italia</span>
                 </div>
-                <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full w-fit">
                   <Calendar className="w-4 h-4" />
                   <span className="font-medium">{formatDate(currentData.timestamp)}</span>
                 </div>
-                <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                  <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full w-fit">
                   <span className="font-bold text-green-600">{getTotalArea()} ha</span>
-                  <span>•</span>
+                  <span className="mx-2">•</span>
                   <span className="font-medium">{getActiveCrops()} colture attive</span>
                 </div>
               </div>
@@ -90,10 +87,10 @@ const DashboardHeader = ({
           </div>
 
           {/* Controlli Dashboard */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4 lg:gap-6">
             
             {/* Stato Tempo Reale */}
-            <div className={`px-4 py-2 rounded-xl flex items-center space-x-3 shadow-md transition-all duration-300 ${
+            <div className={`px-5 py-3 rounded-xl flex items-center space-x-4 shadow-md transition-all duration-300 ${
               isRealTimeActive
                 ? isDarkMode 
                   ? 'bg-gradient-to-r from-green-900 to-green-800 border border-green-700' 
@@ -117,10 +114,10 @@ const DashboardHeader = ({
             </div>
 
             {/* Gruppo Pulsanti Controllo */}
-            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-xl p-1 shadow-md">
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-xl p-2 shadow-md gap-1">
               <button
                 onClick={onToggleRealTime}
-                className={`p-2 rounded-lg transition-all duration-200 ${
+                className={`p-3 rounded-lg transition-all duration-200 ${
                   isDarkMode 
                     ? 'hover:bg-gray-600 text-gray-300 hover:text-white' 
                     : 'hover:bg-white hover:shadow-md text-gray-600 hover:text-gray-900'
@@ -136,7 +133,7 @@ const DashboardHeader = ({
 
               <button
                 onClick={onRefresh}
-                className={`p-2 rounded-lg transition-all duration-200 ${
+                className={`p-3 rounded-lg transition-all duration-200 ${
                   isDarkMode 
                     ? 'hover:bg-gray-600 text-gray-300 hover:text-white' 
                     : 'hover:bg-white hover:shadow-md text-gray-600 hover:text-gray-900'
@@ -148,7 +145,7 @@ const DashboardHeader = ({
 
               <button
                 onClick={onReset}
-                className={`p-2 rounded-lg transition-all duration-200 ${
+                className={`p-3 rounded-lg transition-all duration-200 ${
                   isDarkMode 
                     ? 'hover:bg-gray-600 text-gray-300 hover:text-white' 
                     : 'hover:bg-white hover:shadow-md text-gray-600 hover:text-gray-900'
@@ -179,15 +176,15 @@ const DashboardHeader = ({
         </div>
 
         {/* Status Bar aggiuntivo per info rapide */}
-        <div className={`mt-5 p-4 rounded-xl border transition-all duration-200 ${
+        <div className={`mt-8 p-6 rounded-xl border transition-all duration-200 ${
           isDarkMode 
             ? 'bg-gray-800/70 border-gray-700/60' 
             : 'bg-white/70 border-gray-200/60'
         }`}>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
-                <Thermometer className="w-4 h-4 text-red-500" />
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                <Thermometer className="w-5 h-5 text-red-500" />
                 <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Temperatura</span>
               </div>
               <div className="text-lg font-bold text-red-600">
@@ -195,8 +192,8 @@ const DashboardHeader = ({
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
-                <Droplets className="w-4 h-4 text-blue-500" />
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                <Droplets className="w-5 h-5 text-blue-500" />
                 <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Umidità</span>
               </div>
               <div className="text-lg font-bold text-blue-600">
@@ -204,8 +201,8 @@ const DashboardHeader = ({
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
-                <DollarSign className="w-4 h-4 text-green-500" />
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                <DollarSign className="w-5 h-5 text-green-500" />
                 <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Ricavi Stimati</span>
               </div>
               <div className="text-lg font-bold text-green-600">
@@ -213,8 +210,8 @@ const DashboardHeader = ({
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
-                <Target className="w-4 h-4 text-purple-500" />
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                <Target className="w-5 h-5 text-purple-500" />
                 <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Efficienza Media</span>
               </div>
               <div className="text-lg font-bold text-purple-600">

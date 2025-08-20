@@ -117,12 +117,12 @@ const ProductionPanel = ({
   };
 
   return (
-    <div className={`space-y-6 ${className} mx-0 lg:mx-0`}>
+    <div className={`space-y-8 ${className} mx-0 lg:mx-0`}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center space-x-3">
-          <Wheat className={`w-6 h-6 ${isDarkMode ? 'text-green-400' : 'text-green-600'}`} />
-          <h2 className="text-xl font-bold">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-4">
+          <Wheat className={`w-7 h-7 ${isDarkMode ? 'text-green-400' : 'text-green-600'}`} />
+          <h2 className="text-2xl font-bold">
             {selectedCrop === 'all' ? 'Produzione Generale' : `${productionData[selectedCrop]?.name || 'Coltura'}`}
           </h2>
         </div>
@@ -134,27 +134,27 @@ const ProductionPanel = ({
       {/* Cards delle colture */}
       <div className={`grid grid-cols-1 ${
         expanded ? 'lg:grid-cols-2' : 'md:grid-cols-2'
-      } gap-8 mt-4`}>
+      } gap-10 mt-6`}>
         {displayCrops.map((crop) => {
           const growthStage = getGrowthStage(crop.growthPercentage);
           
           return (
             <div
               key={crop.id}
-              className={`p-6 rounded-lg border transition-all duration-200 hover:shadow-lg ${
+              className={`p-8 rounded-lg border transition-all duration-200 hover:shadow-lg ${
                 isDarkMode 
                   ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
                   : 'bg-white border-gray-200 hover:border-gray-300'
               }`}
             >
               {/* Header coltura */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <span className="text-2xl">{crop.icon}</span>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-4">
+                  <span className="text-3xl">{crop.icon}</span>
                   <div>
-                    <h3 className="font-semibold text-lg">{crop.name}</h3>
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
-                      <MapPin className="w-3 h-3" />
+                    <h3 className="font-semibold text-xl">{crop.name}</h3>
+                    <div className="flex items-center space-x-3 text-sm text-gray-500">
+                      <MapPin className="w-4 h-4" />
                       <span>{crop.area} ha</span>
                     </div>
                   </div>
@@ -163,8 +163,8 @@ const ProductionPanel = ({
               </div>
 
               {/* Progresso crescita */}
-              <div className="mb-5">
-                <div className="flex items-center justify-between text-sm mb-2">
+              <div className="mb-6">
+                <div className="flex items-center justify-between text-sm mb-3">
                   <span className="text-gray-500">Crescita</span>
                   <span className={`font-medium ${
                     isDarkMode ? 'text-green-400' : 'text-green-600'
@@ -182,7 +182,7 @@ const ProductionPanel = ({
                     style={{ width: `${crop.growthPercentage}%` }}
                   ></div>
                 </div>
-                <div className="flex items-center justify-between text-xs mt-1">
+                <div className="flex items-center justify-between text-xs mt-2">
                   <span className={`px-2 py-1 rounded-full ${
                     growthStage.color === 'blue' ? 'bg-blue-100 text-blue-800' :
                     growthStage.color === 'green' ? 'bg-green-100 text-green-800' :
@@ -197,11 +197,11 @@ const ProductionPanel = ({
               </div>
 
               {/* Metriche */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className={`p-3 rounded-lg ${
+              <div className="grid grid-cols-2 gap-6">
+                <div className={`p-4 rounded-lg ${
                   isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
                 }`}>
-                  <div className="flex items-center space-x-2 mb-1">
+                  <div className="flex items-center space-x-3 mb-2">
                     <Target className="w-4 h-4 text-blue-500" />
                     <span className="text-xs text-gray-500">Efficienza</span>
                   </div>
@@ -215,10 +215,10 @@ const ProductionPanel = ({
                   </p>
                 </div>
 
-                <div className={`p-3 rounded-lg ${
+                <div className={`p-4 rounded-lg ${
                   isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
                 }`}>
-                  <div className="flex items-center space-x-2 mb-1">
+                  <div className="flex items-center space-x-3 mb-2">
                     <TrendingUp className="w-4 h-4 text-green-500" />
                     <span className="text-xs text-gray-500">Produzione</span>
                   </div>
@@ -227,10 +227,10 @@ const ProductionPanel = ({
                   </p>
                 </div>
 
-                <div className={`p-3 rounded-lg ${
+                <div className={`p-4 rounded-lg ${
                   isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
                 }`}>
-                  <div className="flex items-center space-x-2 mb-1">
+                  <div className="flex items-center space-x-3 mb-2">
                     <DollarSign className="w-4 h-4 text-yellow-500" />
                     <span className="text-xs text-gray-500">Ricavi</span>
                   </div>
@@ -239,10 +239,10 @@ const ProductionPanel = ({
                   </p>
                 </div>
 
-                <div className={`p-3 rounded-lg ${
+                <div className={`p-4 rounded-lg ${
                   isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
                 }`}>
-                  <div className="flex items-center space-x-2 mb-1">
+                  <div className="flex items-center space-x-3 mb-2">
                     <Clock className="w-4 h-4 text-purple-500" />
                     <span className="text-xs text-gray-500">€/ha</span>
                   </div>
@@ -258,14 +258,14 @@ const ProductionPanel = ({
 
       {/* Grafici comparativi */}
       {selectedCrop === 'all' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Grafico efficienza vs crescita */}
-          <div className={`p-6 rounded-lg border ${
+          <div className={`p-8 rounded-lg border ${
             isDarkMode 
               ? 'bg-gray-800 border-gray-700' 
               : 'bg-white border-gray-200'
           }`}>
-            <h3 className="text-lg font-semibold mb-4">Efficienza per Coltura</h3>
+            <h3 className="text-xl font-semibold mb-6">Efficienza per Coltura</h3>
             <div className="chart-16x9">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={efficiencyData}>
@@ -294,12 +294,12 @@ const ProductionPanel = ({
           </div>
 
           {/* Grafico distribuzione ricavi */}
-          <div className={`p-6 rounded-lg border ${
+          <div className={`p-8 rounded-lg border ${
             isDarkMode 
               ? 'bg-gray-800 border-gray-700' 
               : 'bg-white border-gray-200'
           }`}>
-            <h3 className="text-lg font-semibold mb-4">Distribuzione Ricavi</h3>
+            <h3 className="text-xl font-semibold mb-6">Distribuzione Ricavi</h3>
             <div className="chart-16x9">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
