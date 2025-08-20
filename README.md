@@ -47,9 +47,13 @@ L'azienda segue un approccio integrato che combina:
 - Reset e riavvio simulazione
 
 ### 🎨 Interfaccia Utente
+- **Design System Moderno** con ShadCN UI per componenti consistenti e accessibili
 - **Design responsivo** ottimizzato per desktop, tablet e mobile
-- **Tema scuro/chiaro** con preferenze utente salvate
+- **Tema scuro/chiaro** con preferenze utente salvate e transizioni fluide
 - **Grafici interattivi** con Recharts per visualizzazioni avanzate
+- **Componenti Glassmorphism** con effetti di trasparenza e blur
+- **Animazioni e transizioni** per un'esperienza utente fluida
+- **Accessibilità completa** con supporto screen reader e navigazione da tastiera
 - **UX ottimizzata** per utenti non tecnici del settore agricolo
 
 ## 🛠️ Tecnologie Utilizzate
@@ -61,8 +65,11 @@ L'azienda segue un approccio integrato che combina:
 
 ### Styling e UI
 - **Tailwind CSS 4.1** - Framework CSS utility-first
+- **ShadCN UI** - Sistema di design con componenti moderni e accessibili
+- **Radix UI** - Componenti headless per accessibilità e interazioni avanzate
 - **Lucide React** - Libreria di icone moderne e consistenti
 - **CSS Custom Properties** - Gestione avanzata dei temi
+- **clsx & tailwind-merge** - Utilità per gestione classi CSS condizionali
 
 ### Grafici e Visualizzazioni
 - **Recharts 3.1** - Libreria per grafici interattivi React-native
@@ -92,6 +99,10 @@ cd company-dashboard
 
 # Installa le dipendenze
 yarn install
+
+# Installa dipendenze ShadCN UI (già incluse)
+yarn add @radix-ui/react-select @radix-ui/react-tooltip
+yarn add class-variance-authority clsx tailwind-merge
 
 # Avvia il server di sviluppo
 yarn dev
@@ -169,12 +180,62 @@ Il sistema analizza automaticamente le correlazioni tra:
 - Precipitazioni e sviluppo vegetativo
 - Fattori di stress e resa finale
 
+## 🎨 Design System e Componenti UI
+
+### ShadCN UI Integration
+Il progetto utilizza **ShadCN UI**, un moderno design system basato su **Radix UI** e **Tailwind CSS**, che fornisce:
+
+#### 🧩 Componenti Principali
+- **Button** - Componente pulsante con varianti (default, destructive, outline, secondary, ghost, link)
+- **Card** - Sistema di card modulari (Card, CardContent, CardHeader, CardTitle, CardDescription)
+- **Badge** - Indicatori di stato e categorie con varianti colore
+- **Select** - Menu a discesa avanzati con ricerca e accessibilità
+- **Tooltip** - Suggerimenti contestuali accessibili
+
+#### ✨ Caratteristiche Principali
+- **Accessibilità Completa** - Supporto ARIA, screen reader e navigazione da tastiera
+- **Varianti Dinamiche** - Sistema di varianti con `class-variance-authority` (CVA)
+- **Temi Adattivi** - Supporto automatico per tema chiaro/scuro
+- **Composizione Modulare** - Componenti combinabili per interfacce complesse
+- **Performance Ottimizzate** - Tree-shaking e bundle size ridotti
+
+#### 🎨 Design Tokens
+```css
+/* CSS Variables per temi */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  /* ... altre variabili */
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... variabili tema scuro */
+}
+```
+
+#### 🛠️ Utilità CSS
+- **`cn()` function** - Fusione intelligente di classi Tailwind con `clsx` e `tailwind-merge`
+- **Conditional Classes** - Gestione dinamica di stili basati su stato
+- **No Conflicts** - Risoluzione automatica dei conflitti tra classi CSS
+
 ## 🔧 Architettura del Codice
 
 ### Struttura Directory
 ```
 src/
 ├── components/           # Componenti React
+│   ├── ui/              # Componenti ShadCN UI
+│   │   ├── button.jsx   # Componente Button riutilizzabile
+│   │   ├── card.jsx     # Componenti Card (Card, CardContent, CardTitle)
+│   │   ├── badge.jsx    # Componente Badge per stati e categorie
+│   │   ├── select.jsx   # Componenti Select avanzati
+│   │   └── tooltip.jsx  # Componente Tooltip accessibile
 │   ├── Dashboard.jsx    # Componente principale
 │   ├── DashboardHeader.jsx
 │   ├── ControlPanel.jsx
@@ -184,6 +245,8 @@ src/
 │   ├── ChartsPanel.jsx
 │   ├── LoadingSpinner.jsx
 │   └── ErrorDisplay.jsx
+├── lib/                 # Utilities e helpers
+│   └── utils.js        # Funzioni utility (cn, classi CSS)
 ├── services/            # Logica business
 │   └── dataSimulator.js # Simulatore dati agricoli
 ├── hooks/               # Custom React hooks
@@ -196,10 +259,13 @@ src/
 
 ### Pattern Utilizzati
 - **Custom Hooks** per logica riutilizzabile
+- **Design System** con ShadCN UI per componenti consistenti
 - **Compound Components** per UI complesse
 - **Render Props** per grafici dinamici
-- **Context Pattern** per stato globale
+- **Context Pattern** per stato globale e temi
 - **Service Layer** per logica di business
+- **Utility-First CSS** con Tailwind per styling modulare
+- **Composition over Inheritance** per componenti riutilizzabili
 
 ## 🌍 Scenario d'Uso
 
@@ -229,6 +295,9 @@ src/
 - [ ] **API Integration** - Dati meteorologici e prezzi di mercato reali
 
 ### Miglioramenti Tecnici
+- [x] **Design System Moderno** - Implementazione completa ShadCN UI
+- [x] **Ottimizzazione CSS** - Rimozione conflitti e pulizia del codice
+- [x] **Componenti Accessibili** - Supporto completo screen reader e keyboard navigation
 - [ ] **Progressive Web App** (PWA) per uso offline
 - [ ] **Server-Side Rendering** (SSR) per SEO
 - [ ] **Database Integration** per persistenza dati storici
@@ -251,10 +320,34 @@ src/
 - **Maintainability** - Codice pulito e ben documentato
 - **Scalabilità** - Architettura estendibile per nuove funzionalità
 
+## 📋 Changelog e Miglioramenti Recenti
+
+### ✅ v2.0.0 - Dicembre 2024
+- **🎨 Design System Completo** - Integrazione ShadCN UI per componenti moderni
+- **🚀 Performance Migliorata** - Ottimizzazione CSS e rimozione conflitti
+- **♿ Accessibilità Completa** - Supporto screen reader e navigazione da tastiera
+- **📱 Responsive Design** - Migliorato spacing e layout su tutti i dispositivi
+- **🎭 Temi Avanzati** - Sistema di temi più robusto con CSS variables
+- **🧩 Componenti Modulari** - Libreria di componenti riutilizzabili
+
+### 🔧 Miglioramenti Tecnici Implementati
+- ✅ **ShadCN UI Integration** - Sistema di design completo
+- ✅ **CSS Optimization** - Pulizia e riorganizzazione degli stili
+- ✅ **Component Architecture** - Struttura modulare migliorata
+- ✅ **Accessibility Standards** - Conformità WCAG 2.1
+- ✅ **Build Optimization** - Configurazione Vite e PostCSS aggiornata
+
+### 🎯 Prossimi Obiettivi
+- 🔄 **Progressive Web App** (PWA) 
+- 📊 **Advanced Analytics** con Machine Learning
+- 🌐 **API Integration** per dati real-time
+- 📱 **Mobile App** nativa
+
 ## 📄 Licenza
 
 Questo progetto è stato sviluppato per scopi educativi e di ricerca nel settore dell'agricoltura digitale.
 
 ---
 
-**Sviluppato con ❤️ per l'innovazione nel settore agricolo**
+**Sviluppato con ❤️ per l'innovazione nel settore agricolo**  
+*Powered by React, ShadCN UI, e moderne tecnologie web*
