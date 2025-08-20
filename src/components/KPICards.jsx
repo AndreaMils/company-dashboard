@@ -9,6 +9,8 @@ import {
   BarChart3,
   MapPin
 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
 
 /**
  * Cards con i principali KPI dell'azienda agricola
@@ -196,16 +198,12 @@ const KPICards = ({ kpis, trends, expanded = false }) => {
           const trendData = kpi.metric ? calculateTrend(trends, kpi.metric) : { trend: 0, direction: 'stable' };
           
           return (
-            <div
+            <Card
               key={kpi.id}
-              className={`rounded-2xl border transition-all duration-300 hover:shadow-xl hover:scale-105 transform animate-slide-in-up glass-effect ${
-                isDarkMode 
-                  ? 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-gray-700/50 hover:border-gray-600/50 shadow-lg' 
-                  : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-gray-200/50 hover:border-gray-300/50 shadow-lg'
-              }`}
+              className="transition-all duration-300 hover:shadow-xl hover:scale-105 transform animate-slide-in-up glass-effect"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="p-8 relative overflow-hidden">
+              <CardContent className="p-8 relative overflow-hidden">
                 {/* Background pattern subtle */}
                 <div className={`absolute top-0 right-0 w-32 h-32 opacity-5 ${getColorClasses(kpi.color)}`}>
                   <IconComponent className="w-full h-full" />
@@ -218,16 +216,19 @@ const KPICards = ({ kpis, trends, expanded = false }) => {
                     </div>
                     
                     {kpi.metric && (
-                      <div className={`flex items-center space-x-2 px-3 py-1.5 rounded-full ${
-                        trendData.direction === 'up' ? 'bg-green-100 dark:bg-green-900/30' :
-                        trendData.direction === 'down' ? 'bg-red-100 dark:bg-red-900/30' :
-                        'bg-gray-100 dark:bg-gray-700'
-                      }`}>
+                      <Badge 
+                        variant={
+                          trendData.direction === 'up' ? 'success' :
+                          trendData.direction === 'down' ? 'destructive' :
+                          'secondary'
+                        }
+                        className="flex items-center space-x-2"
+                      >
                         <TrendIcon direction={trendData.direction} trend={trendData.trend} />
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                        <span className="text-sm font-medium">
                           {trendData.trend.toFixed(1)}%
                         </span>
-                      </div>
+                      </Badge>
                     )}
                   </div>
                   
@@ -244,8 +245,8 @@ const KPICards = ({ kpis, trends, expanded = false }) => {
                     )}
                   </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           );
         })}
       </div>

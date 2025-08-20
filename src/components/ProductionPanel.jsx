@@ -10,6 +10,8 @@ import {
   CheckCircle
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Card, CardContent, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
 
 /**
  * Pannello per la visualizzazione dei dati di produzione
@@ -139,14 +141,11 @@ const ProductionPanel = ({
           const growthStage = getGrowthStage(crop.growthPercentage);
           
           return (
-            <div
+            <Card
               key={crop.id}
-              className={`p-8 rounded-lg border transition-all duration-200 hover:shadow-lg ${
-                isDarkMode 
-                  ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
+              className="transition-all duration-200 hover:shadow-lg"
             >
+              <CardContent className="p-8">
               {/* Header coltura */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
@@ -251,7 +250,8 @@ const ProductionPanel = ({
                   </p>
                 </div>
               </div>
-            </div>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
@@ -260,12 +260,9 @@ const ProductionPanel = ({
       {selectedCrop === 'all' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Grafico efficienza vs crescita */}
-          <div className={`p-8 rounded-lg border ${
-            isDarkMode 
-              ? 'bg-gray-800 border-gray-700' 
-              : 'bg-white border-gray-200'
-          }`}>
-            <h3 className="text-xl font-semibold mb-6">Efficienza per Coltura</h3>
+          <Card>
+            <CardContent className="p-8">
+            <CardTitle className="text-xl font-semibold mb-6">Efficienza per Coltura</CardTitle>
             <div className="chart-16x9">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={efficiencyData}>
@@ -291,15 +288,13 @@ const ProductionPanel = ({
                 </BarChart>
               </ResponsiveContainer>
             </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Grafico distribuzione ricavi */}
-          <div className={`p-8 rounded-lg border ${
-            isDarkMode 
-              ? 'bg-gray-800 border-gray-700' 
-              : 'bg-white border-gray-200'
-          }`}>
-            <h3 className="text-xl font-semibold mb-6">Distribuzione Ricavi</h3>
+          <Card>
+            <CardContent className="p-8">
+            <CardTitle className="text-xl font-semibold mb-6">Distribuzione Ricavi</CardTitle>
             <div className="chart-16x9">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -324,20 +319,18 @@ const ProductionPanel = ({
                 </PieChart>
               </ResponsiveContainer>
             </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {/* Trend specifico coltura se selezionata */}
       {selectedCrop !== 'all' && trends && trends.length > 0 && expanded && (
-        <div className={`p-6 rounded-lg border ${
-          isDarkMode 
-            ? 'bg-gray-800 border-gray-700' 
-            : 'bg-white border-gray-200'
-        }`}>
-          <h3 className="text-lg font-semibold mb-4">
+        <Card>
+          <CardContent className="p-6">
+          <CardTitle className="text-lg font-semibold mb-4">
             Trend Crescita - {productionData[selectedCrop]?.name}
-          </h3>
+          </CardTitle>
           <div className="chart-16x9">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={trends.slice(-10)}>
@@ -364,7 +357,8 @@ const ProductionPanel = ({
               </BarChart>
             </ResponsiveContainer>
           </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

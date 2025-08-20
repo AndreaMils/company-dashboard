@@ -8,6 +8,15 @@ import {
   TrendingUp,
   Activity
 } from 'lucide-react';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 /**
  * Pannello di controllo per filtri e impostazioni vista
@@ -97,23 +106,16 @@ const ControlPanel = ({
               {viewModeOptions.map((mode) => {
                 const IconComponent = mode.icon;
                 return (
-                  <button
+                  <Button
                     key={mode.value}
                     onClick={() => onViewModeChange(mode.value)}
-                    className={`px-5 py-3 rounded-lg transition-all duration-200 flex items-center space-x-3 shadow-sm hover:shadow ${
-                      viewMode === mode.value
-                        ? isDarkMode
-                          ? 'bg-blue-600 text-white border border-blue-500'
-                          : 'bg-blue-600 text-white border border-blue-500'
-                        : isDarkMode
-                          ? 'bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600'
-                          : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
-                    }`}
+                    variant={viewMode === mode.value ? "default" : "outline"}
+                    className="flex items-center space-x-3 h-auto px-5 py-3"
                     title={mode.description}
                   >
                     <IconComponent className="w-5 h-5" />
                     <span className="text-sm font-medium">{mode.label}</span>
-                  </button>
+                  </Button>
                 );
               })}
             </div>
@@ -129,21 +131,21 @@ const ControlPanel = ({
                 <span>Periodo:</span>
               </div>
               
-              <select
-                value={selectedTimeRange}
-                onChange={(e) => onTimeRangeChange(e.target.value)}
-                className={`px-5 py-3 rounded-xl border shadow-sm transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  isDarkMode
-                    ? 'bg-gray-700 border-gray-600 text-white hover:bg-gray-600'
-                    : 'bg-white border-gray-300 text-gray-900 hover:border-gray-400'
-                }`}
-              >
-                {timeRangeOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.icon} {option.label}
-                  </option>
-                ))}
-              </select>
+              <Select value={selectedTimeRange} onValueChange={onTimeRangeChange}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="Seleziona periodo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {timeRangeOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      <span className="flex items-center space-x-2">
+                        <span>{option.icon}</span>
+                        <span>{option.label}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Filtro Colture (solo in vista produzione o panoramica) */}
@@ -154,21 +156,21 @@ const ControlPanel = ({
                   <span>Coltura:</span>
                 </div>
                 
-                <select
-                  value={selectedCrop}
-                  onChange={(e) => onCropChange(e.target.value)}
-                  className={`px-5 py-3 rounded-xl border shadow-sm transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                    isDarkMode
-                      ? 'bg-gray-700 border-gray-600 text-white hover:bg-gray-600'
-                      : 'bg-white border-gray-300 text-gray-900 hover:border-gray-400'
-                  }`}
-                >
-                  {cropOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.icon} {option.label}
-                    </option>
-                  ))}
-                </select>
+                <Select value={selectedCrop} onValueChange={onCropChange}>
+                  <SelectTrigger className="w-52">
+                    <SelectValue placeholder="Seleziona coltura" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {cropOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        <span className="flex items-center space-x-2">
+                          <span>{option.icon}</span>
+                          <span>{option.label}</span>
+                        </span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             )}
           </div>
@@ -179,35 +181,23 @@ const ControlPanel = ({
           <div className="mt-6 pt-5 border-t border-gray-200/50 dark:border-gray-700/50">
             <div className="flex flex-wrap gap-4">
               {viewMode !== 'overview' && (
-                <div className={`inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold shadow-sm ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-r from-blue-900/80 to-blue-800/80 text-blue-300 border border-blue-700/50' 
-                    : 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border border-blue-200'
-                }`}>
-                  <Eye className="w-4 h-4 mr-2" />
-                  Vista: {viewModeOptions.find(m => m.value === viewMode)?.label}
-                </div>
+                <Badge variant="info" className="flex items-center space-x-2">
+                  <Eye className="w-4 h-4" />
+                  <span>Vista: {viewModeOptions.find(m => m.value === viewMode)?.label}</span>
+                </Badge>
               )}
               
               {selectedCrop !== 'all' && (
-                <div className={`inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold shadow-sm ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-r from-green-900/80 to-green-800/80 text-green-300 border border-green-700/50' 
-                    : 'bg-gradient-to-r from-green-50 to-green-100 text-green-700 border border-green-200'
-                }`}>
-                  <Filter className="w-4 h-4 mr-2" />
-                  Coltura: {cropOptions.find(c => c.value === selectedCrop)?.label}
-                </div>
+                <Badge variant="success" className="flex items-center space-x-2">
+                  <Filter className="w-4 h-4" />
+                  <span>Coltura: {cropOptions.find(c => c.value === selectedCrop)?.label}</span>
+                </Badge>
               )}
               
-              <div className={`inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold shadow-sm ${
-                isDarkMode 
-                  ? 'bg-gradient-to-r from-purple-900/80 to-purple-800/80 text-purple-300 border border-purple-700/50' 
-                  : 'bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 border border-purple-200'
-              }`}>
-                <Clock className="w-4 h-4 mr-2" />
-                Periodo: {timeRangeOptions.find(t => t.value === selectedTimeRange)?.label}
-              </div>
+              <Badge variant="secondary" className="flex items-center space-x-2">
+                <Clock className="w-4 h-4" />
+                <span>Periodo: {timeRangeOptions.find(t => t.value === selectedTimeRange)?.label}</span>
+              </Badge>
             </div>
           </div>
         )}

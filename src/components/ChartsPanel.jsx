@@ -27,6 +27,9 @@ import {
   ComposedChart
 } from 'recharts';
 import { format } from 'date-fns';
+import { Card, CardContent, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
 
 /**
  * Pannello avanzato per grafici e analytics
@@ -378,21 +381,18 @@ const ChartsPanel = ({
   const availableCharts = getChartTypesByFocus();
 
   return (
-    <div className={`p-6 rounded-lg border mx-0 sm:mx-0 ${
-      isDarkMode 
-        ? 'bg-gray-800 border-gray-700' 
-        : 'bg-white border-gray-200'
-    }`}>
+    <Card className="mx-0 sm:mx-0">
+      <CardContent className="p-6">
       {/* Header con controlli */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-4 sm:space-y-0">
         <div className="flex items-center space-x-3">
           <BarChart3 className={`w-6 h-6 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
-          <h3 className="text-xl font-bold">Analytics Avanzate</h3>
+          <CardTitle className="text-xl font-bold">Analytics Avanzate</CardTitle>
         </div>
         
         <div className="flex items-center space-x-2">
           <Filter className={`w-4 h-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`} />
-          <span className="text-sm text-gray-500">Periodo: {selectedTimeRange}</span>
+          <Badge variant="outline">Periodo: {selectedTimeRange}</Badge>
         </div>
       </div>
 
@@ -401,23 +401,17 @@ const ChartsPanel = ({
         {availableCharts.map((chart) => {
           const IconComponent = chart.icon;
           return (
-            <button
+            <Button
               key={chart.id}
               onClick={() => setSelectedChart(chart.id)}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                selectedChart === chart.id
-                  ? isDarkMode
-                    ? 'bg-blue-900 text-blue-300 border border-blue-700'
-                    : 'bg-blue-100 text-blue-700 border border-blue-300'
-                  : isDarkMode
-                    ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+              variant={selectedChart === chart.id ? "default" : "outline"}
+              size="sm"
+              className="flex items-center space-x-2"
               title={chart.description}
             >
               <IconComponent className="w-4 h-4" />
               <span className="text-sm font-medium">{chart.label}</span>
-            </button>
+            </Button>
           );
         })}
       </div>
@@ -458,7 +452,8 @@ const ChartsPanel = ({
           </div>
         </div>
       </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

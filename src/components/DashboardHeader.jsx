@@ -14,6 +14,9 @@ import {
   DollarSign,
   Target
 } from 'lucide-react';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Card, CardContent } from './ui/card';
 
 /**
  * Header del dashboard con informazioni azienda e controlli principali
@@ -176,50 +179,48 @@ const DashboardHeader = ({
         </div>
 
         {/* Status Bar aggiuntivo per info rapide */}
-        <div className={`mt-8 p-6 rounded-xl border transition-all duration-200 ${
-          isDarkMode 
-            ? 'bg-gray-800/70 border-gray-700/60' 
-            : 'bg-white/70 border-gray-200/60'
-        }`}>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
-                <Thermometer className="w-5 h-5 text-red-500" />
-                <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Temperatura</span>
+        <Card className="mt-8">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                  <Thermometer className="w-5 h-5 text-red-500" />
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Temperatura</span>
+                </div>
+                <div className="text-lg font-bold text-red-600">
+                  {currentData.environmental.temperature}°C
+                </div>
               </div>
-              <div className="text-lg font-bold text-red-600">
-                {currentData.environmental.temperature}°C
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                  <Droplets className="w-5 h-5 text-blue-500" />
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Umidità</span>
+                </div>
+                <div className="text-lg font-bold text-blue-600">
+                  {currentData.environmental.humidity}%
+                </div>
               </div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
-                <Droplets className="w-5 h-5 text-blue-500" />
-                <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Umidità</span>
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                  <DollarSign className="w-5 h-5 text-green-500" />
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Ricavi Stimati</span>
+                </div>
+                <div className="text-lg font-bold text-green-600">
+                  €{currentData.kpis.totalRevenue.toLocaleString('it-IT')}
+                </div>
               </div>
-              <div className="text-lg font-bold text-blue-600">
-                {currentData.environmental.humidity}%
-              </div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
-                <DollarSign className="w-5 h-5 text-green-500" />
-                <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Ricavi Stimati</span>
-              </div>
-              <div className="text-lg font-bold text-green-600">
-                €{currentData.kpis.totalRevenue.toLocaleString('it-IT')}
-              </div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
-                <Target className="w-5 h-5 text-purple-500" />
-                <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Efficienza Media</span>
-              </div>
-              <div className="text-lg font-bold text-purple-600">
-                {currentData.kpis.averageEfficiency}%
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
+                  <Target className="w-5 h-5 text-purple-500" />
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Efficienza Media</span>
+                </div>
+                <div className="text-lg font-bold text-purple-600">
+                  {currentData.kpis.averageEfficiency}%
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </header>
   );

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { format } from 'date-fns';
+import { Card, CardContent, CardTitle } from './ui/card';
 
 /**
  * Pannello per la visualizzazione dei dati ambientali
@@ -183,14 +184,11 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
           const colorClasses = getColorClasses(metric.color);
           
           return (
-            <div
+            <Card
               key={metric.id}
-              className={`p-6 rounded-lg border transition-all duration-200 ${
-                isDarkMode 
-                  ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
+              className="transition-all duration-200 hover:shadow-lg"
             >
+              <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className={`p-3 rounded-lg ${colorClasses.split(' ')[1]}`}>
                   <IconComponent className={`w-6 h-6 ${colorClasses.split(' ')[0]}`} />
@@ -216,23 +214,21 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
                   </div>
                 )}
               </div>
-            </div>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
 
       {/* Grafico trend se espanso o con dati sufficienti */}
       {(expanded || trends.length > 5) && (
-        <div className={`p-8 rounded-lg border ${
-          isDarkMode 
-            ? 'bg-gray-800 border-gray-700' 
-            : 'bg-white border-gray-200'
-        }`}>
+        <Card>
+          <CardContent className="p-8">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-semibold flex items-center space-x-3">
+            <CardTitle className="text-xl font-semibold flex items-center space-x-3">
               <TrendingUp className="w-6 h-6" />
               <span>Trend Ambientali</span>
-            </h3>
+            </CardTitle>
             <div className="text-sm text-gray-500">
               Ultimi {trends.length} aggiornamenti
             </div>
@@ -302,7 +298,8 @@ const EnvironmentalPanel = ({ currentData, trends, expanded = false, className =
               </LineChart>
             </ResponsiveContainer>
           </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Alertsi condizioni critiche */}

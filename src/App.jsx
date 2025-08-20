@@ -10,7 +10,7 @@ function App() {
 function AppWithTheme() {
   return (
     <ThemeProvider>
-      <div style={{ padding: '10px 40px' }}>
+      <div style={{ padding: '10px 80px' }}>
         <App />
       </div>
     </ThemeProvider>

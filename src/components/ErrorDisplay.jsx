@@ -1,5 +1,7 @@
 import { useTheme } from '../hooks/useTheme';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { Card, CardContent, CardTitle } from './ui/card';
+import { Button } from './ui/button';
 
 /**
  * Componente per la visualizzazione degli errori
@@ -18,11 +20,8 @@ const ErrorDisplay = ({
     <div className={`min-h-screen flex items-center justify-center p-4 ${
       isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
     }`}>
-      <div className={`max-w-md w-full text-center space-y-6 p-8 rounded-lg border ${
-        isDarkMode 
-          ? 'bg-gray-800 border-gray-700' 
-          : 'bg-white border-gray-200'
-      }`}>
+      <Card className="max-w-md w-full text-center">
+        <CardContent className="space-y-6 p-8">
         {/* Icona di errore */}
         <div className="flex justify-center">
           <div className={`p-4 rounded-full ${
@@ -36,11 +35,11 @@ const ErrorDisplay = ({
 
         {/* Titolo errore */}
         <div className="space-y-2">
-          <h2 className={`text-xl font-bold ${
+          <CardTitle className={`text-xl font-bold ${
             isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>
             {title}
-          </h2>
+          </CardTitle>
           
           {/* Messaggio errore */}
           <p className={`text-sm ${
@@ -80,31 +79,24 @@ const ErrorDisplay = ({
         {/* Pulsanti di azione */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           {showRetry && onRetry && (
-            <button
+            <Button
               onClick={onRetry}
-              className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                isDarkMode
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
-              }`}
+              className="flex items-center space-x-2"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Riprova</span>
-            </button>
+            </Button>
           )}
           
           {showHome && onHome && (
-            <button
+            <Button
               onClick={onHome}
-              className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                isDarkMode
-                  ? 'bg-gray-600 hover:bg-gray-700 text-white'
-                  : 'bg-gray-600 hover:bg-gray-700 text-white'
-              }`}
+              variant="secondary"
+              className="flex items-center space-x-2"
             >
               <Home className="w-4 h-4" />
               <span>Home</span>
-            </button>
+            </Button>
           )}
         </div>
 
@@ -114,7 +106,8 @@ const ErrorDisplay = ({
         }`}>
           Errore rilevato alle {new Date().toLocaleTimeString('it-IT')}
         </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

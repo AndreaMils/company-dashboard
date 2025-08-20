@@ -1,5 +1,6 @@
 import { useTheme } from '../hooks/useTheme';
 import { Loader2, Tractor } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
 
 /**
  * Componente di loading per il dashboard
@@ -19,9 +20,8 @@ const LoadingSpinner = ({ message = 'Caricamento...', size = 'default' }) => {
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
         : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
     }`}>
-      <div className={`text-center space-y-6 p-8 rounded-2xl glass-effect ${
-        isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'
-      } border shadow-2xl animate-slide-in-up`}>
+      <Card className="text-center shadow-2xl glass-effect animate-slide-in-up">
+        <CardContent className="space-y-6 p-8">
         
         {/* Icone principali con animazioni */}
         <div className="flex items-center justify-center space-x-3">
@@ -83,7 +83,8 @@ const LoadingSpinner = ({ message = 'Caricamento...', size = 'default' }) => {
               : 'from-green-600 to-blue-600'
           } animate-pulse shimmer`}></div>
         </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
