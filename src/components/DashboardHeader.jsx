@@ -122,15 +122,15 @@ const DashboardHeader = ({
                 onClick={onToggleRealTime}
                 className={`p-3 rounded-lg transition-all duration-200 ${
                   isDarkMode 
-                    ? 'hover:bg-gray-600 text-gray-300 hover:text-white' 
-                    : 'hover:bg-white hover:shadow-md text-gray-600 hover:text-gray-900'
+                    ? 'text-gray-300 hover:bg-gray-600 hover:text-white' 
+                    : 'text-gray-600 hover:bg-white hover:shadow-md hover:text-gray-900'
                 }`}
                 title={isRealTimeActive ? 'Pausa aggiornamenti' : 'Riprendi aggiornamenti'}
               >
                 {isRealTimeActive ? (
-                  <Pause className="w-5 h-5" />
+                  <Pause className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
                 ) : (
-                  <Play className="w-5 h-5" />
+                  <Play className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
                 )}
               </button>
 
@@ -138,24 +138,24 @@ const DashboardHeader = ({
                 onClick={onRefresh}
                 className={`p-3 rounded-lg transition-all duration-200 ${
                   isDarkMode 
-                    ? 'hover:bg-gray-600 text-gray-300 hover:text-white' 
-                    : 'hover:bg-white hover:shadow-md text-gray-600 hover:text-gray-900'
+                    ? 'text-gray-300 hover:bg-gray-600 hover:text-white' 
+                    : 'text-gray-600 hover:bg-white hover:shadow-md hover:text-gray-900'
                 }`}
                 title="Aggiorna dati"
               >
-                <RefreshCw className="w-5 h-5" />
+                <RefreshCw className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
               </button>
 
               <button
                 onClick={onReset}
                 className={`p-3 rounded-lg transition-all duration-200 ${
                   isDarkMode 
-                    ? 'hover:bg-gray-600 text-gray-300 hover:text-white' 
-                    : 'hover:bg-white hover:shadow-md text-gray-600 hover:text-gray-900'
+                    ? 'text-gray-300 hover:bg-gray-600 hover:text-white' 
+                    : 'text-gray-600 hover:bg-white hover:shadow-md hover:text-gray-900'
                 }`}
                 title="Reset simulazione"
               >
-                <RotateCcw className="w-5 h-5" />
+                <RotateCcw className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
               </button>
             </div>
 
